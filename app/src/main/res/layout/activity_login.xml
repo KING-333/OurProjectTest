@@ -9,13 +9,13 @@
 
     <TextView
 
-        android:gravity="center"
-        android:singleLine="false"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:text="Hi                            \n智慧医疗欢迎您！"
-        android:textSize="34sp"
-        />
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:singleLine="false"
+        android:text="             Hi               \n智慧医疗欢迎您！"
+        android:textSize="34sp" />
 
 
 
@@ -115,15 +115,15 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="35dp"
 
+        android:background="@drawable/ee"
         android:text="登 录"
-        android:background="@android:color/holo_red_light"
         android:textColor="@android:color/white"
-        android:textSize="18sp"/>
+        android:textSize="24sp" />
 
 </LinearLayout>
