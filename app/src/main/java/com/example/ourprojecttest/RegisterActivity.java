@@ -19,6 +19,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -27,6 +29,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,8 +39,30 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
 
-    boolean flagmax = true;
+            switch (msg.what) {
+                case 0:
+                    new AlertDialog.Builder(RegisterActivity.this).setTitle("跳转").setMessage("注册成功过,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(RegisterActivity.this,MailboxActivity.class);
+                            startActivity(intent);
+                        }
+                    }).setNegativeButton("取消",null).show();
+                    break;
+                case -1:
+                    new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("邮箱已被使用").setNegativeButton("确定",null).show();
+                    default:
+                        break;
+            }
+        }
+    };
+
+
     int mYear, mMonth, mDay;
     Button btn;
     TextView dateDisplay;
@@ -126,10 +151,6 @@ public class RegisterActivity extends AppCompatActivity {
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("两次密码不一致").setNegativeButton("确定",null).show();
                     flag = false;
                 }
-                else if (!checkNo_repetition(userNo)&&flag){
-                    new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("该邮箱已经被注册").setNegativeButton("确定",null).show();
-                    flag = false;
-                }
                 else if (!checkSex(userSex)&&flag){
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("请合理选择性别").setNegativeButton("确定",null).show();
                     flag = false;
@@ -142,20 +163,13 @@ public class RegisterActivity extends AppCompatActivity {
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("请输入合理体重").setNegativeButton("确定",null).show();
                     flag = false;
                 }
-                interData();
-                if (!flagmax&&flag){
-                    //添加数据到数据库
-                    new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("注册失败或邮箱已被使用").setNegativeButton("确定",null).show();
+                else if (flag)
+                {
+                    interData();
                 }
-                else {
-                    new AlertDialog.Builder(RegisterActivity.this).setTitle("跳转").setMessage("注册成功过,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(RegisterActivity.this,MailboxActivity.class);
-                            startActivity(intent);
-                        }
-                    }).setNegativeButton("取消",null).show();
-                }
+
+
+
             }
         });
     }
@@ -190,10 +204,6 @@ public class RegisterActivity extends AppCompatActivity {
             tag = false;
         }
         return tag;
-    }
-    //验证邮箱是否被注册过
-    private boolean checkNo_repetition(String no){
-        return true;
     }
     //检验性别
     private boolean checkSex(String no){
@@ -265,7 +275,7 @@ public class RegisterActivity extends AppCompatActivity {
                     parseJSONWithJSONObject(responseData);
                 } catch (Exception e)
                 {
-                    flagmax = false;
+                   e.printStackTrace();
                 }
             }
         }).start();
@@ -274,20 +284,23 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void parseJSONWithJSONObject(String jsonData){
         try{
-            JSONArray jsonArray = new JSONArray(jsonData);
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-            String code = jsonObject.getString("code");
-            if (code.equals("0"))
-            {
-                flagmax = true;
-            }
-            else
-            {
-                flagmax = false;
-            }
+            JSONObject jsonObject=new JSONObject(jsonData);
+            String code=jsonObject.getString("code");
+            Message msg = Message.obtain();
+
+                if (code.equals("0"))
+                {
+                    msg.what = 0 ;
+                }
+                else
+                {
+                    msg.what = -1;
+                }
+                handler.sendMessage(msg);
+
         } catch ( Exception e)
         {
-            flagmax = false;
+            e.printStackTrace();
         }
     }
     //初始化数据
