@@ -18,6 +18,9 @@ public class MainActivity extends Activity implements OnPageChangeListener{
     /**
      * ViewPager
      */
+
+
+
     private ViewPager viewPager;
     // 定义是否开启自动滚动，默认开启
     private boolean isAutoPlay = true;
