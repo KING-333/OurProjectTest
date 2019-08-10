@@ -7,7 +7,7 @@
             <!--圆角 -->
             <corners android:radius="20dp"></corners>
             <!--边框颜色-->
-            <solid android:color="#05EE2C"></solid>
+
         </shape>
     </item>
     <!-- 主题背景颜色值-->
