@@ -37,6 +37,7 @@ import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    boolean flagmax = true;
     int mYear, mMonth, mDay;
     Button btn;
     TextView dateDisplay;
@@ -141,7 +142,8 @@ public class RegisterActivity extends AppCompatActivity {
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("请输入合理体重").setNegativeButton("确定",null).show();
                     flag = false;
                 }
-                else if (!interData(userName,userNo,userPwd,userSex,userBir,userHei,userWei)&&flag){
+                interData();
+                if (!flagmax&&flag){
                     //添加数据到数据库
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("注册失败或邮箱已被使用").setNegativeButton("确定",null).show();
                 }
@@ -239,39 +241,53 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     //向数据库中插入数据
-    private boolean interData(String name,String no,String pwd,String sex ,String bri,String hei,String wei){
-        String url = " http://139.196.103.219:8080/IM1/servlet/LoginDataServlet?no="+no+"&name="+name+"&pwd="+pwd+"&sex="+sex+"&birth="+bri+"&height="+hei+"&weight="+wei+"&sno=9999";
+    private void interData(){
 
-        boolean flag;
 
-        try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().url(url).build();
-            Response response = client.newCall(request).execute();
-            String responseData = response.body().string();
-            flag = parseJSONWithJSONObject(responseData);
-        } catch (Exception e)
-        {
-            return false;
-        }
-        return flag;
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String userName = stuName.getText().toString().trim();
+                    String userNo = stuNo.getText().toString().trim();
+                    String userPwd = stuPwd.getText().toString().trim();
+                    String userSex = stuSex.getText().toString().trim();
+                    String userHei = stuHei.getText().toString().trim();
+                    String userWei = stuWei.getText().toString().trim();
+                    String userBir = stuBir.getText().toString().trim();
+                    String url = " http://139.196.103.219:8080/IM1/servlet/LoginDataServlet?no="+userNo+"&name="+userName+"&pwd="+userPwd+"&sex="+userSex+"&birth="+userBir+"&height="+userHei+"&weight="+userWei+"&sno=9999";
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url(url).build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    parseJSONWithJSONObject(responseData);
+                } catch (Exception e)
+                {
+                    flagmax = false;
+                }
+            }
+        }).start();
+
+
     }
-    private boolean parseJSONWithJSONObject(String jsonData){
+    private void parseJSONWithJSONObject(String jsonData){
         try{
             JSONArray jsonArray = new JSONArray(jsonData);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String code = jsonObject.getString("code");
             if (code.equals("0"))
             {
-                return true;
+                flagmax = true;
             }
             else
             {
-                return false;
+                flagmax = false;
             }
         } catch ( Exception e)
         {
-            return false;
+            flagmax = false;
         }
     }
     //初始化数据
