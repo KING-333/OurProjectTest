@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
 
-hahahahahhahahah
+
     ///
     @Override
     protected void onCreate(Bundle savedInstanceState) {
