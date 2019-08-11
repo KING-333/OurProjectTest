@@ -24,7 +24,7 @@ public class DocRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_register);
-
+//pppppp
     }
     private void initView(){
         docNo = (TextView) findViewById(R.id.docNo);
