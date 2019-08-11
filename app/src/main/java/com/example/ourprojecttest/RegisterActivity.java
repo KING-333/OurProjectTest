@@ -167,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     interData();
                 }
-                int o;
+
 
 
             }
