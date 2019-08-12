@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:text="请填写您的信息"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/docNo"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:hint="学号" />
+
+            <EditText
+                android:id="@+id/docName"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:hint="姓名" />
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <EditText
+                android:textStyle="normal"
+                android:id="@+id/docPwd"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:hint="密码"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/docReg"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_gravity="end"
+            android:text="注册" />
+
+    </LinearLayout>
+</LinearLayout>

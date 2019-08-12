@@ -15,11 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.os.*;
 public class MainActivity extends Activity implements OnPageChangeListener{
-    /**
-     * ViewPager1111
-     * 1111111111fff
-     * 1111
-     */
 
 
 
@@ -95,6 +90,13 @@ public class MainActivity extends Activity implements OnPageChangeListener{
             @Override
             public void onClick(View v){
                 Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(MainActivity.this,RegisterActivity.class);
                 startActivity(intent);
             }
         });
