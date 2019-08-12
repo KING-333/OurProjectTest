@@ -41,7 +41,7 @@ public class MailboxActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    new AlertDialog.Builder(MailboxActivity.this).setTitle("跳转").setMessage("注册成功过,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    new AlertDialog.Builder(MailboxActivity.this).setTitle("跳转").setMessage("验证成功,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intent = new Intent(MailboxActivity.this,MailboxActivity.class);
@@ -54,12 +54,10 @@ public class MailboxActivity extends AppCompatActivity {
 
     }
     private String getConde(){
-        //Random rand = new Random(10);
         String code1 ="";
         for (int i =0;i<4;i++)
         {
             code1 = code1 + (int)(Math.random() * 10);
-            //code1 = code1 + rand.nextInt(10);
         }
         return code1;
     }

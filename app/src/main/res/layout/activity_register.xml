@@ -2,62 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_back"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="79dp"
+            android:layout_gravity="center"
             android:gravity="center"
             android:text="请填写您的信息"
             android:textSize="20sp" />
 
         <EditText
-            android:background="@drawable/edit_text"
+
             android:id="@+id/stuNo"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_weight="1"
-            android:hint="学号" />
+            android:background="@drawable/edit_selector"
+            android:hint="学号"
+            android:textCursorDrawable="@null" />
 
         <EditText
-            android:background="@drawable/edit_text"
+
             android:id="@+id/stuName"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_weight="1"
-            android:hint="姓名" />
+            android:background="@drawable/edit_selector"
+            android:hint="姓名"
+            android:textCursorDrawable="@null" />
 
         <EditText
-            android:background="@drawable/edit_text"
+
             android:id="@+id/stuPwd"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_weight="1"
+            android:background="@drawable/edit_selector"
             android:hint="密码"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null" />
+
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="5dp"
             android:layout_weight="1">
 
             <EditText
                 android:id="@+id/stuPwd_two"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
                 android:layout_weight="1"
-                android:background="@drawable/edit_text"
+                android:background="@drawable/edit_selector"
                 android:hint="再次确认密码"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textCursorDrawable="@null" />
 
             <Button
                 android:id="@+id/look"
@@ -70,61 +88,92 @@
 
 
         <EditText
-            android:background="@drawable/edit_text"
+
             android:id="@+id/stuSex"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_weight="1"
-            android:hint="性别" />
+            android:background="@drawable/edit_selector"
+            android:hint="性别"
+            android:textCursorDrawable="@null" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
+
+            <EditText
                 android:id="@+id/dateDisplay"
-                android:layout_width="82dp"
-                android:layout_height="64dp"
-                android:layout_weight="4"
-                android:gravity="center_vertical|left"
-                android:text="1970-1-1" />
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_selector"
+                android:enabled="false"
+                android:hint="出生年月"
+                android:textCursorDrawable="@null" />
+
 
             <Button
-                android:background="@drawable/button_data"
+
                 android:id="@+id/dateChoose"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="140dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="35dp"
                 android:layout_weight="1"
-                android:text="选择 日期" />
+                android:background="@drawable/btn2"
+                android:bottom="2dp"
+                android:text="选择日期"
+                android:textColor="#FA0A0A0A"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
-
         <EditText
-            android:background="@drawable/edit_text"
+
             android:id="@+id/stuHei"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_weight="1"
-            android:hint="身高(CM)" />
+            android:background="@drawable/edit_selector"
+            android:hint="身高(CM)"
+            android:textCursorDrawable="@null" />
 
         <EditText
-            android:background="@drawable/edit_text"
+
             android:id="@+id/stuWei"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
             android:layout_weight="1"
-            android:hint="体重(KG)" />
+            android:background="@drawable/edit_selector"
+            android:hint="体重(KG)"
+            android:textCursorDrawable="@null" />
 
         <Button
-            android:background="@drawable/button_reg"
             android:id="@+id/stuReg"
-            android:layout_width="120dp"
+            android:layout_width="342dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:text="注册" />
+            android:layout_marginTop="40dp"
+            android:background="@drawable/ee"
+            android:text="注册"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="181dp" />
 
     </LinearLayout>
 </LinearLayout>
