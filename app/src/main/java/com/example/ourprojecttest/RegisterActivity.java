@@ -39,6 +39,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+    String code="";
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             switch (msg.what) {
                 case 0:
-                    new AlertDialog.Builder(RegisterActivity.this).setTitle("跳转").setMessage("注册成功过,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    new AlertDialog.Builder(RegisterActivity.this).setTitle("跳转").setMessage("注册成功,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intent = new Intent(RegisterActivity.this,MailboxActivity.class);
@@ -75,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView stuHei;
     private TextView stuWei;
     private TextView stuBir;
+    private TextView stuMsg;
     private Button btnLook;
     private Button btnRegister;
     private boolean mbDisplayFlg = false;
@@ -83,6 +85,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        //获取验证码
+        final TextView msg = (TextView) this.findViewById(R.id.msg);
+        Button getmsg = (Button) this.findViewById(R.id.getmsg);
+        getmsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                code = getConde();
+                sendCode();
+
+            }
+        });
 
         btnLook = (Button) findViewById(R.id.look);
         stuPwd_two = (TextView) findViewById(R.id.stuPwd_two);
@@ -133,6 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userHei = stuHei.getText().toString();
                 String userWei = stuWei.getText().toString();
                 String userBir = stuBir.getText().toString();
+                String userMsg = stuMsg.getText().toString();
 
                 boolean flag = true;
                 if (TextUtils.isEmpty(userName)||TextUtils.isEmpty(userBir)||TextUtils.isEmpty(userHei)||TextUtils.isEmpty(userNo)||TextUtils.isEmpty(userPwd)||TextUtils.isEmpty(userSex)||TextUtils.isEmpty(userWei)||TextUtils.isEmpty(userPwd_two)){
@@ -163,6 +177,11 @@ public class RegisterActivity extends AppCompatActivity {
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("请输入合理体重").setNegativeButton("确定",null).show();
                     flag = false;
                 }
+                else if (!checkCode(userMsg)&&flag)
+                {
+                    new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("验证码错误").setNegativeButton("确定",null).show();
+                    flag = false;
+                }
                 else if (flag)
                 {
                     interData();
@@ -172,6 +191,19 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+    //发送验证码
+    private void sendCode()
+    {
+
+    }
+    //验证验证码是否一致
+    private boolean checkCode(String userCode)
+    {
+        if (userCode.equals(code))
+            return true;
+        else
+            return false;
     }
     //验证密码是否一致
     private boolean checkPwd_repitition(String pwd,String pwd_two){
@@ -252,10 +284,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
     //向数据库中插入数据
     private void interData(){
-
-
-
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -279,8 +307,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
-
     }
     private void parseJSONWithJSONObject(String jsonData){
         try{
@@ -303,6 +329,15 @@ public class RegisterActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    //获取验证码
+    private String getConde(){
+        String code1 ="";
+        for (int i =0;i<4;i++)
+        {
+            code1 = code1 + (int)(Math.random() * 10);
+        }
+        return code1;
+    }
     //初始化数据
     private void initView(){
         stuNo = (TextView) findViewById(R.id.stuNo);
@@ -312,6 +347,7 @@ public class RegisterActivity extends AppCompatActivity {
         stuHei = (TextView) findViewById(R.id.stuHei);
         stuWei = (TextView) findViewById(R.id.stuWei);
         stuBir = (TextView) findViewById(R.id.dateDisplay);
+        stuMsg = (TextView) findViewById(R.id.msg);
         btnRegister = (Button) findViewById(R.id.stuReg);
     }
     @Override
