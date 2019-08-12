@@ -28,6 +28,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,8 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     };
-
-
+    private RadioGroup radioGroup;
+    private RadioButton radioMen,radioWomen;
     int mYear, mMonth, mDay;
     Button btn;
     TextView dateDisplay;
@@ -72,7 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView stuNo;
     private TextView stuPwd;
     private TextView stuPwd_two;
-    private TextView stuSex;
     private TextView stuHei;
     private TextView stuWei;
     private TextView stuBir;
@@ -142,14 +143,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String userNo = stuNo.getText().toString();
                 String userPwd = stuPwd.getText().toString();
                 String userPwd_two = stuPwd_two.getText().toString();
-                String userSex = stuSex.getText().toString();
                 String userHei = stuHei.getText().toString();
                 String userWei = stuWei.getText().toString();
                 String userBir = stuBir.getText().toString();
                 String userMsg = stuMsg.getText().toString();
 
                 boolean flag = true;
-                if (TextUtils.isEmpty(userName)||TextUtils.isEmpty(userBir)||TextUtils.isEmpty(userHei)||TextUtils.isEmpty(userNo)||TextUtils.isEmpty(userPwd)||TextUtils.isEmpty(userSex)||TextUtils.isEmpty(userWei)||TextUtils.isEmpty(userPwd_two)){
+                if (!radioWomen.isChecked()&&!radioMen.isChecked()){
+                    new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("请选择性别").setNegativeButton("确定",null).show();
+                    flag = false;
+                }
+                else if (TextUtils.isEmpty(userName)||TextUtils.isEmpty(userBir)||TextUtils.isEmpty(userHei)||TextUtils.isEmpty(userNo)||TextUtils.isEmpty(userPwd)||TextUtils.isEmpty(userWei)||TextUtils.isEmpty(userPwd_two)){
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("值不能为空").setNegativeButton("确定",null).show();
                     flag = false;
                 }
@@ -163,10 +167,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else if (!checkPwd_repitition(userPwd,userPwd_two)&&flag){
                     new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("两次密码不一致").setNegativeButton("确定",null).show();
-                    flag = false;
-                }
-                else if (!checkSex(userSex)&&flag){
-                    new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("请合理选择性别").setNegativeButton("确定",null).show();
                     flag = false;
                 }
                 else if (!checkHei(userHei)&&flag){
@@ -195,7 +195,9 @@ public class RegisterActivity extends AppCompatActivity {
     //发送验证码
     private void sendCode()
     {
-
+        stuNo = (TextView) findViewById(R.id.stuNo);
+        String userNo = stuNo.getText().toString();
+        EamilUtil.sendMail(userNo,code);
     }
     //验证验证码是否一致
     private boolean checkCode(String userCode)
@@ -236,17 +238,6 @@ public class RegisterActivity extends AppCompatActivity {
             tag = false;
         }
         return tag;
-    }
-    //检验性别
-    private boolean checkSex(String no){
-        if (no.equals("men")||no.equals("women"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
     //检验身高
     private boolean checkHei(String hei){
@@ -291,11 +282,19 @@ public class RegisterActivity extends AppCompatActivity {
                     String userName = stuName.getText().toString().trim();
                     String userNo = stuNo.getText().toString().trim();
                     String userPwd = stuPwd.getText().toString().trim();
-                    String userSex = stuSex.getText().toString().trim();
                     String userHei = stuHei.getText().toString().trim();
                     String userWei = stuWei.getText().toString().trim();
                     String userBir = stuBir.getText().toString().trim();
-                    String url = " http://139.196.103.219:8080/IM1/servlet/LoginDataServlet?no="+userNo+"&name="+userName+"&pwd="+userPwd+"&sex="+userSex+"&birth="+userBir+"&height="+userHei+"&weight="+userWei+"&sno=9999";
+                    String url = "";
+                    if (radioMen.isChecked())
+                    {
+                        url = " http://139.196.103.219:8080/IM1/servlet/LoginDataServlet?no="+userNo+"&name="+userName+"&pwd="+userPwd+"&sex=男&birth="+userBir+"&height="+userHei+"&weight="+userWei+"&sno=9999";
+                    }
+                    else
+                    {
+                        url = " http://139.196.103.219:8080/IM1/servlet/LoginDataServlet?no="+userNo+"&name="+userName+"&pwd="+userPwd+"&sex=女&birth="+userBir+"&height="+userHei+"&weight="+userWei+"&sno=9999";
+                    }
+
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder().url(url).build();
                     Response response = client.newCall(request).execute();
@@ -343,12 +342,14 @@ public class RegisterActivity extends AppCompatActivity {
         stuNo = (TextView) findViewById(R.id.stuNo);
         stuName = (TextView) findViewById(R.id.stuName);
         stuPwd = (TextView) findViewById(R.id.stuPwd);
-        stuSex = (TextView) findViewById(R.id.stuSex);
         stuHei = (TextView) findViewById(R.id.stuHei);
         stuWei = (TextView) findViewById(R.id.stuWei);
         stuBir = (TextView) findViewById(R.id.dateDisplay);
         stuMsg = (TextView) findViewById(R.id.msg);
         btnRegister = (Button) findViewById(R.id.stuReg);
+        radioMen = (RadioButton) findViewById(R.id.radieMen);
+        radioWomen = (RadioButton) findViewById(R.id.radioWomen);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
     }
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -363,7 +364,7 @@ public class RegisterActivity extends AppCompatActivity {
      * 设置日期 利用StringBuffer追加
      */
     public void display() {
-        dateDisplay.setText(new StringBuffer().append(mYear).append("-").append(mMonth).append("-").append(mDay).append(" "));
+        dateDisplay.setText(new StringBuffer().append(mYear).append("-").append(mMonth+1).append("-").append(mDay).append(" "));
     }
 
     private DatePickerDialog.OnDateSetListener mdateListener = new DatePickerDialog.OnDateSetListener() {
