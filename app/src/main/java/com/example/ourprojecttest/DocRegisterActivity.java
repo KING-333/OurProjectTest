@@ -61,8 +61,8 @@ public class DocRegisterActivity extends AppCompatActivity {
                     new AlertDialog.Builder(DocRegisterActivity.this).setTitle("跳转").setMessage("注册成功,准备好登陆了吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(DocRegisterActivity.this,MainActivity.class);
-                            startActivity(intent);
+                          //  Intent intent = new Intent(DocRegisterActivity.this,MainActivity.class);
+                            //startActivity(intent);
                         }
                     }).setNegativeButton("取消",null).show();
                 }
