@@ -113,9 +113,9 @@ public class MainActivity extends Activity implements OnPageChangeListener{
             ImageView imageView = new ImageView(this);
             tips[i] = imageView;
             if(i == 0){
-                tips[i].setBackgroundResource(R.drawable.white);
-            }else{
                 tips[i].setBackgroundResource(R.drawable.blue);
+            }else{
+                tips[i].setBackgroundResource(R.drawable.white);
             }
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
