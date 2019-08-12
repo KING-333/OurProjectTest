@@ -144,8 +144,15 @@ public class LoginActivity extends AppCompatActivity {
                         TextView userPass = findViewById(R.id.user_psw);
                         String name = userName.getText().toString().trim();
                         String pass = userPass.getText().toString().trim();
-                        String url="http://139.196.103.219:8080/IM1/servlet/Login?no=" + name + "&pwd=" + pass;
-
+                        String url;
+                        if(radioButton_stu.isChecked()){
+                            url="http://139.196.103.219:8080/IM1/servlet/Login?no=" + name + "&pwd=" + pass;
+                            Log.d("tiaoshi","学生");
+                        }
+                        else{
+                            Log.d("tiaoshi","医生");
+                            url="http://139.196.103.219:8080/IM1/servlet/Login_Doc?no="+name+"&pwd="+pass;
+                        }
                         OkHttpClient client = new OkHttpClient();
                         Request request = new Request.Builder()
                                 .url(url)
