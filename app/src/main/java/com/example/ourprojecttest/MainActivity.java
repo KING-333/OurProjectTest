@@ -206,7 +206,7 @@ public class MainActivity extends Activity implements OnPageChangeListener{
             }else{
                 tips[i].setBackgroundResource(R.drawable.white);
             }
-        } 
+        }
     }
 
 }
