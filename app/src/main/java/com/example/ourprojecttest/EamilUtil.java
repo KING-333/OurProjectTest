@@ -19,8 +19,8 @@ import javax.mail.Authenticator;
  *
  *-------------------------------------------------------------------------*/
 public class EamilUtil {
-    public static String account = "ourprojecttesto@163/com";//自己的邮箱
-    public static String password = "123456a";//密码
+    public static String account = "ourprojecttesto@163.com";//自己的邮箱
+    public static String password = "123456b";//密码
 
 
     // 发件人邮箱的 SMTP 服务器地址, 必须准确, 不同邮件服务器地址不同, 一般(只是一般, 绝非绝对)格式为: smtp.xxx.com
@@ -58,7 +58,7 @@ public class EamilUtil {
 // 3.2设置收件人
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 // 3.3设置邮件的主题
-            message.setSubject("");
+            message.setSubject("验证码实验者来凑字数");
 // 3.4设置邮件的正文
 //message.setContent("<h1>来自智慧电梯的激活邮件，您的验证码是：</h1><h3><a href='http://localhost:10080/Demo_JavaMail/active?code=" + code + "'>http://localhost:10080/Demo_JavaMail/active?code=" + code + "</h3>", "text/html;charset=UTF-8");
             message.setContent("<h1>，您的验证码是：" + code, "text/html;charset=UTF-8");

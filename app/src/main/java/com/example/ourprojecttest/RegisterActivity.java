@@ -15,10 +15,12 @@ import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -80,24 +82,32 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView stuMsg;
     private Button btnLook;
     private Button btnRegister;
+    private Button getmsg;
     private boolean mbDisplayFlg = false;
+    private TimeCount time;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         //获取验证码
-        final TextView msg = (TextView) this.findViewById(R.id.msg);
-        Button getmsg = (Button) this.findViewById(R.id.getmsg);
+        time = new TimeCount(60000, 1000);
+        getmsg = (Button) this.findViewById(R.id.getmsg);
         getmsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 code = getConde();
                 sendCode();
+                //60秒倒计时
+                //time.start();
+
 
             }
         });
 
+        //密码可见不可见
         btnLook = (Button) findViewById(R.id.look);
         stuPwd_two = (TextView) findViewById(R.id.stuPwd_two);
         btnLook.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +145,41 @@ public class RegisterActivity extends AppCompatActivity {
         initListener();
 
     }
+
+    //验证码60秒倒计时
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            getmsg.setBackgroundColor(Color.parseColor("#B6B6D8"));
+            getmsg.setClickable(false);
+            getmsg.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
+        }
+        @Override
+        public void onFinish() {
+            getmsg.setText("重新获取验证码");
+            getmsg.setClickable(true);
+            getmsg.setBackgroundColor(Color.parseColor("#4EB84A"));
+        }
+
+    }
+    //初始化数据
+    private void initView(){
+        stuNo = (TextView) findViewById(R.id.stuNo);
+        stuName = (TextView) findViewById(R.id.stuName);
+        stuPwd = (TextView) findViewById(R.id.stuPwd);
+        stuHei = (TextView) findViewById(R.id.stuHei);
+        stuWei = (TextView) findViewById(R.id.stuWei);
+        stuBir = (TextView) findViewById(R.id.dateDisplay);
+        stuMsg = (TextView) findViewById(R.id.msg);
+        btnRegister = (Button) findViewById(R.id.stuReg);
+        radioMen = (RadioButton) findViewById(R.id.radioMen);
+        radioWomen = (RadioButton) findViewById(R.id.radioWomen);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+    }
+    //初始化方法
     private void initListener(){
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,8 +241,11 @@ public class RegisterActivity extends AppCompatActivity {
     private void sendCode()
     {
         stuNo = (TextView) findViewById(R.id.stuNo);
-        String userNo = stuNo.getText().toString();
-        EamilUtil.sendMail(userNo,code);
+        String userNo = stuNo.getText().toString().trim();
+        if (checkNo(userNo)&&!userNo.isEmpty())
+            EamilUtil.sendMail(userNo,code);
+        else
+            new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("邮箱格式错误").setNegativeButton("确定",null).show();
     }
     //验证验证码是否一致
     private boolean checkCode(String userCode)
@@ -337,20 +385,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return code1;
     }
-    //初始化数据
-    private void initView(){
-        stuNo = (TextView) findViewById(R.id.stuNo);
-        stuName = (TextView) findViewById(R.id.stuName);
-        stuPwd = (TextView) findViewById(R.id.stuPwd);
-        stuHei = (TextView) findViewById(R.id.stuHei);
-        stuWei = (TextView) findViewById(R.id.stuWei);
-        stuBir = (TextView) findViewById(R.id.dateDisplay);
-        stuMsg = (TextView) findViewById(R.id.msg);
-        btnRegister = (Button) findViewById(R.id.stuReg);
-        radioMen = (RadioButton) findViewById(R.id.radieMen);
-        radioWomen = (RadioButton) findViewById(R.id.radioWomen);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-    }
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
