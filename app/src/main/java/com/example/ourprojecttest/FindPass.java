@@ -54,7 +54,7 @@ public class FindPass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
               if(input_verification_box.getText().toString().trim().equals(String.valueOf(num))){//如果验证码正确
-                  //////登录更新数据库
+                  //////登录更新数据库1
               }
               else{
                   Toast.makeText(FindPass.this,"您输入的验证码或邮箱不正确，请重新输入！",Toast.LENGTH_SHORT).show();
