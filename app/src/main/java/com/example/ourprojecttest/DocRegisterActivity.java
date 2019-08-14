@@ -24,6 +24,7 @@ public class DocRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_register);
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
 //pppppp
     }
     private void initView(){

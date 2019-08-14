@@ -61,9 +61,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();//隐藏actionBar
         setContentView(R.layout.activity_login);
-
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
         //获取radiobutton
         radioButton_doc = findViewById(R.id.doctor);
         radioButton_stu = findViewById(R.id.student);
