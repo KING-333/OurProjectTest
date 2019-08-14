@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_back"
+    android:background="@drawable/back"
     android:orientation="vertical">
 
     <LinearLayout
@@ -55,6 +55,7 @@
             android:layout_marginRight="35dp"
             android:layout_weight="1"
             android:background="@drawable/edit_selector"
+            android:drawableRight="@drawable/biyan"
             android:hint="密码"
             android:inputType="textPassword"
             android:textCursorDrawable="@null" />
@@ -73,6 +74,7 @@
                 android:layout_marginRight="35dp"
                 android:layout_weight="1"
                 android:background="@drawable/edit_selector"
+                android:drawableRight="@drawable/biyan"
                 android:hint="再次确认密码"
                 android:inputType="textPassword"
                 android:textCursorDrawable="@null" />
@@ -212,7 +214,8 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/ee"
             android:text="注册"
-            android:textSize="18sp" />
+            android:textColor="#FCFFFFFF"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView2"

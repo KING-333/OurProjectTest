@@ -2,9 +2,9 @@
 <!--登录界面,用LinearLayout-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/login_back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back2"
     android:orientation="vertical">
 
     <TextView
@@ -18,9 +18,6 @@
         android:textSize="34sp" />
 
 
-
-
-
     <!--账号输入框-->
     <EditText
         android:id="@+id/user_name"
@@ -32,6 +29,7 @@
         android:layout_marginRight="35dp"
         android:background="@drawable/edit_selector"
         android:drawableRight="@drawable/chahao"
+        android:drawableLeft="@drawable/用户"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="请输入用户名"
@@ -45,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-            <!--密码输入框-->
+    <!--密码输入框-->
     <EditText
         android:id="@+id/user_psw"
         android:layout_width="match_parent"
@@ -55,6 +53,7 @@
         android:layout_marginRight="35dp"
         android:background="@drawable/edit_selector"
         android:drawableRight="@drawable/biyan"
+        android:drawableLeft="@drawable/suo"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="请输入密码"
@@ -70,43 +69,42 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:gravity="right"
-        android:paddingRight="25dp"
         android:paddingTop="15dp"
+        android:paddingRight="25dp"
         android:text="忘记密码？"
-        android:textSize="14sp"
-        />
-
+        android:textSize="14sp" />
 
 
     <RadioGroup
-        android:paddingTop="20dp"
+        android:id="@+id/role_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/role_selection"
         android:gravity="center"
-        android:orientation="horizontal">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="我是学生        "
-                android:id="@+id/student"
-                android:textSize="20sp"
-                   android:checked="true"
-                />
-            <RadioButton
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="我是医生"
-                android:id="@+id/doctor"/>
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <RadioButton
+            android:id="@+id/student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:gravity="center"
+            android:text="我是学生        "
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="我是医生"
+            android:textSize="20sp" />
     </RadioGroup>
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="30dp" />
-    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
     <!--按钮-->
     <Button
         android:id="@+id/btn_login"
