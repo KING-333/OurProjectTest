@@ -41,7 +41,7 @@ public class ImmersiveStatusbar {
      */
     public void Immersive(Window window, ActionBar actionBar) {
 
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 22) {
 
             View view = window.getDecorView();
 
