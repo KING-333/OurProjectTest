@@ -76,7 +76,6 @@
 
 
     <RadioGroup
-        android:background="@drawable/radiobutton_style"
         android:id="@+id/role_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,6 +87,7 @@
             android:id="@+id/student"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="#2196F3"
             android:checked="true"
             android:gravity="center"
             android:text="我是学生        "
@@ -97,6 +97,7 @@
             android:id="@+id/doctor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="#2196F3"
             android:gravity="center"
             android:text="我是医生"
             android:textSize="20sp" />

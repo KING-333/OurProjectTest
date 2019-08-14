@@ -13,6 +13,7 @@ public class SelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
         Button docbtn = (Button) this.findViewById(R.id.docter);
         Button stubtn = (Button) this.findViewById(R.id.student);
         docbtn.setOnClickListener(new View.OnClickListener() {

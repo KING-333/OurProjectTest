@@ -15,11 +15,13 @@ import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -83,44 +85,38 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView stuMsg;
     private Button btnLook;
     private Button btnRegister;
+    private Button getmsg;
     private boolean mbDisplayFlg = false;
+    private TimeCount time;
 
-    EditText userName,passWord;
+
+
     private boolean isHide=true;
     Drawable drawableEyeOpen,drawableEyeClose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
+
         //获取验证码
-        final TextView msg = (TextView) this.findViewById(R.id.msg);
-        Button getmsg = (Button) this.findViewById(R.id.getmsg);
+        time = new TimeCount(60000, 1000);
+        getmsg = (Button) this.findViewById(R.id.getmsg);
         getmsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 code = getConde();
                 sendCode();
+                //60秒倒计时
+                //time.start();
+
 
             }
         });
 
-        btnLook = (Button) findViewById(R.id.look);
+        //密码可见不可见
+
         stuPwd_two = (TextView) findViewById(R.id.stuPwd_two);
-        btnLook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mbDisplayFlg) {
-                    // display password text, for example "123456"
-                    stuPwd_two.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    // hide password, display "."
-                    stuPwd_two.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-                mbDisplayFlg = !mbDisplayFlg;
-                stuPwd_two.postInvalidate();
-            }
-        });
-
         btn = (Button) findViewById(R.id.dateChoose);
         dateDisplay = (TextView) findViewById(R.id.dateDisplay);
 
@@ -142,15 +138,15 @@ public class RegisterActivity extends AppCompatActivity {
         drawableEyeClose = getResources().getDrawable(R.drawable.biyan);
         drawableEyeOpen = getResources().getDrawable(R.drawable.zhengyan);
 
-        passWord.setOnTouchListener(new View.OnTouchListener() {
+        stuPwd.setOnTouchListener(new View.OnTouchListener() {
 
-            final Drawable[] drawables = passWord.getCompoundDrawables();//获取密码框的drawable数组
+            final Drawable[] drawables = stuPwd.getCompoundDrawables();//获取密码框的drawable数组
             final int eyeWidth = drawables[2].getBounds().width();// 眼睛图标的宽度
 
-            Drawable drawable = passWord.getCompoundDrawables()[2];
+            Drawable drawable = stuPwd.getCompoundDrawables()[2];
 
             public boolean onTouch(View view, MotionEvent event) {
-                if (event.getX() > passWord.getWidth() - passWord.getPaddingRight() - drawable.getIntrinsicWidth()) {
+                if (event.getX() > stuPwd.getWidth() - stuPwd.getPaddingRight() - drawable.getIntrinsicWidth()) {
                     if (event.getAction() != MotionEvent.ACTION_UP)
                         return false;
 
@@ -158,18 +154,53 @@ public class RegisterActivity extends AppCompatActivity {
                     if (isHide) {
                         drawableEyeOpen.setBounds(drawables[2].getBounds());//设置睁开眼睛的界限
 
-                        passWord.setCompoundDrawables(drawables[0], null, drawableEyeOpen, null);
+                        stuPwd.setCompoundDrawables(drawables[0], null, drawableEyeOpen, null);
                         Log.d("loginfalse", String.valueOf(isHide));
-                        passWord.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        stuPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         isHide = false;
                     }
                     //如果当前密码框是明文
                     else {
                         drawableEyeClose.setBounds(drawables[2].getBounds());//设置闭眼的界限
-                        passWord.setCompoundDrawables(drawables[0], null, drawableEyeClose, null);
+                        stuPwd.setCompoundDrawables(drawables[0], null, drawableEyeClose, null);
 
                         Log.d("logintrue", String.valueOf(isHide));
-                        passWord.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        stuPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        isHide = true;
+                    }
+
+                }
+                return false;
+            }
+        });
+        stuPwd_two.setOnTouchListener(new View.OnTouchListener() {
+
+            final Drawable[] drawables = stuPwd_two.getCompoundDrawables();//获取密码框的drawable数组
+            final int eyeWidth = drawables[2].getBounds().width();// 眼睛图标的宽度
+
+            Drawable drawable = stuPwd_two.getCompoundDrawables()[2];
+
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getX() > stuPwd_two.getWidth() - stuPwd_two.getPaddingRight() - drawable.getIntrinsicWidth()) {
+                    if (event.getAction() != MotionEvent.ACTION_UP)
+                        return false;
+
+                    //如果当前密码框是密文
+                    if (isHide) {
+                        drawableEyeOpen.setBounds(drawables[2].getBounds());//设置睁开眼睛的界限
+
+                        stuPwd_two.setCompoundDrawables(drawables[0], null, drawableEyeOpen, null);
+                        Log.d("loginfalse", String.valueOf(isHide));
+                        stuPwd_two.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        isHide = false;
+                    }
+                    //如果当前密码框是明文
+                    else {
+                        drawableEyeClose.setBounds(drawables[2].getBounds());//设置闭眼的界限
+                        stuPwd_two.setCompoundDrawables(drawables[0], null, drawableEyeClose, null);
+
+                        Log.d("logintrue", String.valueOf(isHide));
+                        stuPwd_two.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         isHide = true;
                     }
 
@@ -179,6 +210,41 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
+    //验证码60秒倒计时
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            getmsg.setBackgroundColor(Color.parseColor("#B6B6D8"));
+            getmsg.setClickable(false);
+            getmsg.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
+        }
+        @Override
+        public void onFinish() {
+            getmsg.setText("重新获取验证码");
+            getmsg.setClickable(true);
+            getmsg.setBackgroundColor(Color.parseColor("#4EB84A"));
+        }
+
+    }
+    //初始化数据
+    private void initView(){
+        stuNo = (TextView) findViewById(R.id.stuNo);
+        stuName = (TextView) findViewById(R.id.stuName);
+        stuPwd = (TextView) findViewById(R.id.stuPwd);
+        stuHei = (TextView) findViewById(R.id.stuHei);
+        stuWei = (TextView) findViewById(R.id.stuWei);
+        stuBir = (TextView) findViewById(R.id.dateDisplay);
+        stuMsg = (TextView) findViewById(R.id.msg);
+        btnRegister = (Button) findViewById(R.id.stuReg);
+        radioMen = (RadioButton) findViewById(R.id.radioMen);
+        radioWomen = (RadioButton) findViewById(R.id.radioWomen);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+    }
+    //初始化方法
     private void initListener(){
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,8 +306,11 @@ public class RegisterActivity extends AppCompatActivity {
     private void sendCode()
     {
         stuNo = (TextView) findViewById(R.id.stuNo);
-        String userNo = stuNo.getText().toString();
-        EamilUtil.sendMail(userNo,code);
+        String userNo = stuNo.getText().toString().trim();
+        if (checkNo(userNo)&&!userNo.isEmpty())
+            EamilUtil.sendMail(userNo,code);
+        else
+            new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("邮箱格式错误").setNegativeButton("确定",null).show();
     }
     //验证验证码是否一致
     private boolean checkCode(String userCode)
@@ -381,18 +450,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return code1;
     }
-    //初始化数据
-    private void initView(){
-        stuNo = (TextView) findViewById(R.id.stuNo);
-        stuName = (TextView) findViewById(R.id.stuName);
-        stuPwd = (TextView) findViewById(R.id.stuPwd);
-        stuHei = (TextView) findViewById(R.id.stuHei);
-        stuWei = (TextView) findViewById(R.id.stuWei);
-        stuBir = (TextView) findViewById(R.id.dateDisplay);
-        stuMsg = (TextView) findViewById(R.id.msg);
-        btnRegister = (Button) findViewById(R.id.stuReg);
 
-    }
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {

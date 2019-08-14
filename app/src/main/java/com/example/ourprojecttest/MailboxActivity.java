@@ -19,6 +19,7 @@ public class MailboxActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mailbox);
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
 
         final TextView msg = (TextView) this.findViewById(R.id.msg);
         Button getmsg = (Button) this.findViewById(R.id.getmsg);

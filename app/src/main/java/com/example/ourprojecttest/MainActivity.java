@@ -2,6 +2,7 @@ package com.example.ourprojecttest;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.viewpager.widget.PagerAdapter;
@@ -15,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.os.*;
 public class MainActivity extends Activity implements OnPageChangeListener{
-
 
 
     private ViewPager viewPager;
@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements OnPageChangeListener{
             if(isAutoPlay){
                 currentItem=viewPager.getCurrentItem();
                 currentItem++;
-                if(currentItem==4){
+                if(currentItem==5){
                     currentItem=0;
                     viewPager.setCurrentItem(currentItem);
                     handler.postDelayed(this,delayTime);
@@ -84,6 +84,7 @@ public class MainActivity extends Activity implements OnPageChangeListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
         Button button1=(Button)findViewById(R.id.button1);
         Button button2=(Button)findViewById(R.id.button2);
         button1.setOnClickListener(new View.OnClickListener(){
@@ -104,7 +105,7 @@ public class MainActivity extends Activity implements OnPageChangeListener{
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         task.run();  //开启滚动方法
         //载入图片资源ID
-        imgIdArray = new int[]{R.drawable.one, R.drawable.two, R.drawable.third,R.drawable.four};
+        imgIdArray = new int[]{R.drawable.one, R.drawable.two, R.drawable.third,R.drawable.four,R.drawable.five};
 
 
         //将点点加入到ViewGroup中
