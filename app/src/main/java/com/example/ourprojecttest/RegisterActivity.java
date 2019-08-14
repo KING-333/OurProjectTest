@@ -15,6 +15,7 @@ import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +26,11 @@ import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -82,6 +85,9 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private boolean mbDisplayFlg = false;
 
+    EditText userName,passWord;
+    private boolean isHide=true;
+    Drawable drawableEyeOpen,drawableEyeClose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +139,44 @@ public class RegisterActivity extends AppCompatActivity {
 
         initView();
         initListener();
+        drawableEyeClose = getResources().getDrawable(R.drawable.biyan);
+        drawableEyeOpen = getResources().getDrawable(R.drawable.zhengyan);
+
+        passWord.setOnTouchListener(new View.OnTouchListener() {
+
+            final Drawable[] drawables = passWord.getCompoundDrawables();//获取密码框的drawable数组
+            final int eyeWidth = drawables[2].getBounds().width();// 眼睛图标的宽度
+
+            Drawable drawable = passWord.getCompoundDrawables()[2];
+
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getX() > passWord.getWidth() - passWord.getPaddingRight() - drawable.getIntrinsicWidth()) {
+                    if (event.getAction() != MotionEvent.ACTION_UP)
+                        return false;
+
+                    //如果当前密码框是密文
+                    if (isHide) {
+                        drawableEyeOpen.setBounds(drawables[2].getBounds());//设置睁开眼睛的界限
+
+                        passWord.setCompoundDrawables(drawables[0], null, drawableEyeOpen, null);
+                        Log.d("loginfalse", String.valueOf(isHide));
+                        passWord.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        isHide = false;
+                    }
+                    //如果当前密码框是明文
+                    else {
+                        drawableEyeClose.setBounds(drawables[2].getBounds());//设置闭眼的界限
+                        passWord.setCompoundDrawables(drawables[0], null, drawableEyeClose, null);
+
+                        Log.d("logintrue", String.valueOf(isHide));
+                        passWord.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        isHide = true;
+                    }
+
+                }
+                return false;
+            }
+        });
 
     }
     private void initListener(){
