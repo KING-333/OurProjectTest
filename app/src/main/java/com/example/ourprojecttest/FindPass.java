@@ -34,7 +34,7 @@ public class FindPass extends AppCompatActivity {
           public void onClick(View view) {
               //随机生成6位的验证码
               num = (int)(Math.random()*1000000+1);
-                  //耗时操作要起子线程
+                  //耗时操作要起子线程1
               new Thread(new Runnable() {
                   @Override
                   public void run() {
