@@ -391,9 +391,7 @@ public class RegisterActivity extends AppCompatActivity {
         stuBir = (TextView) findViewById(R.id.dateDisplay);
         stuMsg = (TextView) findViewById(R.id.msg);
         btnRegister = (Button) findViewById(R.id.stuReg);
-        radioMen = (RadioButton) findViewById(R.id.radieMen);
-        radioWomen = (RadioButton) findViewById(R.id.radioWomen);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+
     }
     @Override
     protected Dialog onCreateDialog(int id) {
