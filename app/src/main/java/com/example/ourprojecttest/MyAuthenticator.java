@@ -1,4 +1,5 @@
 package com.example.ourprojecttest;
+<<<<<<< Updated upstream
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
