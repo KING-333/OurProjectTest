@@ -13,8 +13,8 @@ public class MyEamil {
         mailInfo.setPassword("shananhai123");//这里要注意。不能是邮箱的密码，要是邮箱的授权码。
         mailInfo.setFromAddress("hzy2290225756@163.com");
         mailInfo.setToAddress(Email);
-        mailInfo.setSubject("重置密码");
-        mailInfo.setContent("您的重置密码为:"+num);
+        mailInfo.setSubject("验证码");
+        mailInfo.setContent("您的验证码为:"+num);
         //这个类主要来发送邮件
         SimpleMailSender sms = new SimpleMailSender();
         sms.sendTextMail(mailInfo);//发送文体格式

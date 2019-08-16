@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 code = getConde();
                 sendCode();
                 //60秒倒计时
-                //time.start();
+                time.start();
 
 
             }
@@ -306,11 +306,20 @@ public class RegisterActivity extends AppCompatActivity {
     private void sendCode()
     {
         stuNo = (TextView) findViewById(R.id.stuNo);
-        String userNo = stuNo.getText().toString().trim();
-        if (checkNo(userNo)&&!userNo.isEmpty())
-            EamilUtil.sendMail(userNo,code);
+        final String userNo = stuNo.getText().toString().trim();
+        if (checkNo(userNo)&&!userNo.isEmpty()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //MyEamil myEamil = new MyEamil();
+                    MyEamil.sendMail(userNo, code);
+                }
+
+            }).start();
+        }
         else
             new AlertDialog.Builder(RegisterActivity.this).setTitle("错误").setMessage("邮箱格式错误").setNegativeButton("确定",null).show();
+
     }
     //验证验证码是否一致
     private boolean checkCode(String userCode)

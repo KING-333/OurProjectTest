@@ -30,7 +30,6 @@
         android:background="@drawable/edit_selector"
         android:drawableLeft="@drawable/yonghu"
         android:drawableRight="@drawable/chahao"
-        android:drawableLeft="@drawable/用户"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="请输入用户名"
