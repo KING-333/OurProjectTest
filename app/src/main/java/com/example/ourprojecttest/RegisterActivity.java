@@ -138,6 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
         drawableEyeClose = getResources().getDrawable(R.drawable.biyan);
         drawableEyeOpen = getResources().getDrawable(R.drawable.zhengyan);
 
+        //666
         stuPwd.setOnTouchListener(new View.OnTouchListener() {
 
             final Drawable[] drawables = stuPwd.getCompoundDrawables();//获取密码框的drawable数组
