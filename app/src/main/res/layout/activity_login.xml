@@ -65,13 +65,14 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/forget_pass"
+        android:id="@+id/login_forget_pass"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:gravity="right"
         android:paddingTop="15dp"
         android:paddingRight="25dp"
         android:text="忘记密码？"
+        android:clickable="true"
         android:textSize="14sp" />
 
 
