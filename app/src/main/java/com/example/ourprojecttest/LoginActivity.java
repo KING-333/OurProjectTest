@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText userName,passWord;
     private boolean isHide=true;
-    private ImageView imageView;
+    TextView login_forget_pass;
     Drawable drawableEyeOpen,drawableEyeClose;
 
 
@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        login_forget_pass= findViewById(R.id.login_forget_pass);
         ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
         //获取radiobutton
         radioButton_doc = findViewById(R.id.doctor);
@@ -74,6 +76,18 @@ public class LoginActivity extends AppCompatActivity {
         //获取眼睛图片资源
         drawableEyeClose = getResources().getDrawable(R.drawable.biyan);
         drawableEyeOpen = getResources().getDrawable(R.drawable.zhengyan);
+
+
+        //注册点击密码的点击事件
+        login_forget_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, FindPass.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         //注册叉号的点击事件
         userName.setOnTouchListener(new View.OnTouchListener() {
