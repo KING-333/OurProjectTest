@@ -29,7 +29,7 @@
             android:layout_marginRight="35dp"
             android:layout_weight="1"
             android:background="@drawable/edit_selector"
-            android:hint="学号"
+            android:hint="邮箱"
             android:textCursorDrawable="@null" />
 
         <EditText

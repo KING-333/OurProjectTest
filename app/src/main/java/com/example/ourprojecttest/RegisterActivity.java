@@ -102,6 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         //获取验证码
         time = new TimeCount(60000, 1000);
         getmsg = (Button) this.findViewById(R.id.getmsg);
+        stuNo =(EditText) this.findViewById(R.id.stuNo);
         getmsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,15 +220,16 @@ public class RegisterActivity extends AppCompatActivity {
         }
         @Override
         public void onTick(long millisUntilFinished) {
-            getmsg.setBackgroundColor(Color.parseColor("#B6B6D8"));
-            getmsg.setClickable(false);
-            getmsg.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
+            if (stuNo.getText() == "") {
+            } else {
+                getmsg.setClickable(false);
+                getmsg.setText("(" + millisUntilFinished / 1000 + ") 秒后可重新发送");
+            }
         }
         @Override
         public void onFinish() {
             getmsg.setText("重新获取验证码");
             getmsg.setClickable(true);
-            getmsg.setBackgroundColor(Color.parseColor("#4EB84A"));
         }
 
     }
