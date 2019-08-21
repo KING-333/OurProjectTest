@@ -13,11 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Noactionbar">
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity">
+
+        </activity>
         <activity android:name=".DocRegisterActivity"/>
         <activity android:name=".MailboxActivity"/>
         <activity android:name=".SelectActivity"/>
+        <activity android:name=".FindPass">
 
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
