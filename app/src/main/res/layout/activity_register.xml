@@ -223,13 +223,13 @@
         <Button
             android:id="@+id/stuReg"
             android:layout_width="342dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:background="@drawable/ee"
             android:text="注册"
             android:textColor="#FCFFFFFF"
-            android:textSize="24sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView2"

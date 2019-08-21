@@ -12,7 +12,7 @@
             <!--设置边框的宽度和颜色 -->
 
             <stroke
-                android:width="1dp"
+                android:width="0.5dp"
                 android:color="#FA948E8E" />
             <!-- 如果感觉字体距离底部或者左边太近，可以设置 padding属性 拉开距离 -->
 

@@ -8,37 +8,48 @@
     android:orientation="vertical">
 
     <TextView
-
+        android:paddingTop="60dp"
+        android:paddingLeft="30dp"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:gravity="center"
         android:singleLine="false"
-        android:text="             Hi               \n智慧医疗欢迎您！"
-        android:textSize="34sp" />
+        android:text="智慧医疗欢迎您"
+        android:textColor="#0C0C0C"
+        android:textSize="30sp" />
 
 
     <!--账号输入框-->
+    <TextView
+        android:paddingTop="20dp"
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="输入您注册时的邮箱及密码"
+        android:textSize="15dp"
+        android:gravity="left"
+        android:textColor="#000000"/>
+
     <EditText
         android:id="@+id/user_name"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="35dp"
-        android:textCursorDrawable="@null"
         android:layout_marginRight="35dp"
         android:background="@drawable/edit_selector"
         android:drawableLeft="@drawable/yonghu"
         android:drawableRight="@drawable/chahao"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
-        android:hint="请输入用户名"
+        android:hint="请输入邮箱"
         android:paddingLeft="8dp"
         android:singleLine="true"
         android:textColor="#000000"
         android:textColorHint="#a3a3a3"
-        android:textSize="18sp" />
+        android:textCursorDrawable="@null"
+        android:textSize="14sp" />
     <!--分割线-->
     <TextView
         android:layout_width="match_parent"
@@ -48,14 +59,13 @@
     <EditText
         android:id="@+id/user_psw"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:textCursorDrawable="@null"
         android:background="@drawable/edit_selector"
-        android:drawableRight="@drawable/biyan"
         android:drawableLeft="@drawable/suo"
+        android:drawableRight="@drawable/biyan"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="请输入密码"
@@ -64,7 +74,8 @@
         android:singleLine="true"
         android:textColor="#000000"
         android:textColorHint="#a3a3a3"
-        android:textSize="18sp" />
+        android:textCursorDrawable="@null"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/login_forget_pass"
@@ -90,20 +101,20 @@
             android:id="@+id/student"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="#2196F3"
+            android:buttonTint="#09EDF5"
             android:checked="true"
             android:gravity="center"
             android:text="我是学生        "
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/doctor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="#2196F3"
+            android:buttonTint="#09EDF5"
             android:gravity="center"
             android:text="我是医生"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </RadioGroup>
 
     <TextView
@@ -114,15 +125,14 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="35dp"
-
-        android:background="@drawable/ee"
+        android:background="@drawable/style_jianbian"
         android:text="登 录"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textColor="#F6F8F8"
+        android:textSize="18sp" />
 
 </LinearLayout>

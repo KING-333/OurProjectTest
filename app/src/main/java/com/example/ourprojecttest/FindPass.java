@@ -45,7 +45,7 @@ public class FindPass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pass);
-
+        ImmersiveStatusbar.getInstance().Immersive(getWindow(),getActionBar());//状态栏透明
         //getSupportActionBar().hide();
         find_pass_user_name=findViewById(R.id.find_pass_user_name);
         get_verification_code=findViewById(R.id.get_verification_code);
